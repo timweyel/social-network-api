@@ -1,5 +1,4 @@
 const { User } = require('../models');
-const reactionSchema = require('../models/Reaction');
 
 const userController = {
   //get all users
@@ -54,5 +53,7 @@ const userController = {
     .catch(err => res.json(err));
   }
 };
+
+  //removeOneUsersThoughtsWhenUserIsDeleted
 
 module.exports = userController;
