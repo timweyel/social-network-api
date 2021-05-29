@@ -64,9 +64,36 @@ const userController = {
     User.findOneAndDelete({ _id: params.id })
     .then(dbUserData => res.json(dbUserData))
     .catch(err => res.json(err));
+  },
+
+  //addFriend /api/users/:userId/friends/:friendId
+  addFriend({ params }, res) {
+    User.findOneAndUpdate(
+      { _id: params.userId },
+      { $addToSet: { friends: params.friendId } },
+      { new: true, runValidators: true }
+    )
+    .then(dbUserData => {
+      if(!dbUserData) {
+        return res.status(404).json({ message: 'No user found with this id!' });
+      }
+      User.findOneAndUpdate(
+        { _id: params.friendId },
+        { $addToSet: { friends: params.userId } },
+        { new: true, runValidators: true }
+      )
+      .then(dbFriendData => {
+        if(!dbFriendData) {
+          return res.status(404).json({ message: 'No user found with this friendId' });
+        }
+        res.json(dbUserData);
+      })
+      .catch(err => res.json(err));
+    })
+    .catch(err => res.json(err));
   }
 };
 
-  //removeOneUsersThoughtsWhenUserIsDeleted
+
 
 module.exports = userController;
