@@ -15,11 +15,12 @@ router.route('/:userId')
 // /api/thoughts
 router.route('/')
   .get(getAllThoughts)
-  .get(getThoughtById);
+
 
 
 // /api/thoughts/<userId>/<thoughtId>
 router.route('/:userId/:thoughtId')
-  .delete(deleteThought);
+  .delete(deleteThought)
+  .post(getThoughtById);;
 
 module.exports= router;
