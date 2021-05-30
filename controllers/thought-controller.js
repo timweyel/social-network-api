@@ -39,8 +39,6 @@ const thoughtController = {
 
   //createOneThought /api/thoughts
   createThought({ params, body }, res) {
-    // console.log('body', body);
-    // console.log('params', params);
     Thought.create(body)
       .then(({ _id }) => {
         return User.findOneAndUpdate(
@@ -58,6 +56,7 @@ const thoughtController = {
       .catch(err => res.json(err));
   },
 
+  //addReaction /api/:thoughtId/reactions/
   addReaction({ params, body }, res) {
     Thought.findOneAndUpdate(
       { _id: params.thoughtId },
@@ -74,6 +73,7 @@ const thoughtController = {
     .catch(err => res.json(err));
   },
 
+  //removeReaction api/:thoughtId/reactions/:reactionId
   removeReaction({ params, body }, res) {
     Thought.findOneAndUpdate(
       { _id: params.thoughtId },

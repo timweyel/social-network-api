@@ -1,7 +1,7 @@
 const { User } = require('../models');
 
 const userController = {
-  //get all users
+  //get all users /api/users
   getAllUsers(req, res) {
     User.find({})
     .populate({
@@ -17,7 +17,7 @@ const userController = {
     });
   },
 
-  //getUserById
+  //getUserById /api/users/:id
   getUserById({ params }, res) {
     User.findOne({ _id: params.id})
     .populate({
@@ -37,7 +37,7 @@ const userController = {
     });
   },
 
-  //createUser
+  //createUser api/
   createUser({ body }, res) {
     User.create(body)
       .then(dbUserData => res.json(dbUserData))
@@ -47,7 +47,7 @@ const userController = {
     });
   },
 
-  //updateUser
+  //updateUser api/:id
   updateUser({ params, body }, res) {
     User.findOneAndUpdate(
       { _id: params.id },
@@ -62,10 +62,11 @@ const userController = {
       .catch(err => res.status(400).json(err));
   },
 
-  //deleteUser
+  //deleteUser api/:id
   deleteUser({ params }, res) {
     User.findOneAndDelete({ _id: params.id })
     .then(dbUserData => {
+      console.log(dbUserData);
       if (!dbUserData) {
         return res.status(404).json({ message: 'No user found with this id'});
         }
@@ -73,13 +74,10 @@ const userController = {
       User.updateMany(
         { _id : { $in: dbUserData.friends } },
         { $pull: { friends: params.id } },
-        //res.json({ message: "deleted user" })
-        //res.status(200)
       )
-      res.status(200)
       .then(() => {
 
-        // remove any comments from this user
+        // remove any thoughts from this user
         Thought.deleteMany({ username : dbUserData.username })
         .then(() => {
 
