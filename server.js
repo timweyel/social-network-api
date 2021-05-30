@@ -8,7 +8,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static('public'));
 
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/social-media-api', {
+mongoose.connect(process.env.MONGODB_URI || 'mongodb+srv://tweyel:gcFF83u18dTN@cluster0.fyzii.mongodb.net/myFirstDatabase?retryWrites=true&w=majority', {
   useFindAndModify: false,
   useNewUrlParser: true,
   useUnifiedTopology: true
