@@ -5,6 +5,13 @@
 
 ## An API for a social network web application where users can share their thoughts, react to friends' thoughts and create a friend list.
 
+## Demo Videos
+[User routes](https://drive.google.com/file/d/1EMvjHg33nf23HUYqtYcEEr8zqgmhMyAr/view)
+
+[Thought routes](https://drive.google.com/file/d/1E4GXsKGoYSkUFv_n9naJvCZLdpqFG8ZJ/view)
+
+[Friend and Reaction routes](https://drive.google.com/file/d/1YkNF8NFG2ujasXYJjCLrqkKvLZ1pwP5j/view)
+
 ### Table of Contents
 1. [Installation](#installation)
 2. [Usage](#usage)
